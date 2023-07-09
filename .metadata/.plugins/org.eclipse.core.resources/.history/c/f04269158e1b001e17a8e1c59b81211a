@@ -1,0 +1,20 @@
+package main;
+
+import javax.swing.*;
+
+public class ConverterToolsGUI {
+	public static void main(String[] args) {
+		//Creamos el marco
+		JFrame converterTools = new JFrame("Conversion Tools - Challenge ONE");
+		converterTools.setSize(600,300);
+		//Creamos el Panel superior (Entradas)
+		JPanel inputPanel = new JPanel();
+		inputPanel.setSize(600,150);
+		
+		
+		
+		
+		converterTools.setVisible(true);
+	}
+	
+}

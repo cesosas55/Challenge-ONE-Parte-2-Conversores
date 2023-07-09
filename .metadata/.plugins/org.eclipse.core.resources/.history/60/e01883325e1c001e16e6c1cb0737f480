@@ -1,0 +1,31 @@
+package main;
+
+import javax.swing.*;
+import javax.swing.event.ChangeListener;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.*;
+
+public class ConversionPanel extends JPanel implements ActionListener, ChangeListener, PropertyChangeListener {
+
+	private static String[] divisas = { "MXN - Peso mexicano", "USD - Dolar americano", "EUR - Euro",
+			"GBP - Libra Esterlina", " - Yen japonés", "- Won Surcoreano" };
+
+	// Etiquetas de la parte superior
+	private static JLabel importeLabel = new JLabel();
+	private static JLabel currencyInLabel = new JLabel();
+	private static JLabel currencyOutLabel = new JLabel();
+	// Campos de entrada
+	private static JTextField cantidadText = new JTextField();
+	private static JComboBox<String> divisasInList = new JComboBox<String>(divisas);
+	private static JButton invertirButton = new JButton();
+	private static JComboBox<String> divisaOoutList = new JComboBox<String>(divisas);
+
+	ConversionPanel() {// Default Constructor
+		// Create the text field format, and then the text field.
+		cantidadText.setColumns(10);
+		cantidadText.addPropertyChangeListener(this);
+	}
+
+}

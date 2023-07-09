@@ -1,0 +1,16 @@
+package main;
+
+public enum Divisa {
+	MXN("MXN - Peso mexicano"), USD("USD - Dólar estadounidense"), EUR("EUR - Euro"), GBP("GBP - Libra esterlina"),
+	JPY("JPY - Yen Japonés"), KRW("KRW - Won surcoreano");
+
+	public final String label;
+
+	public Divisa() {
+
+	}
+
+	private Divisa(String nombre) {
+		this.label = nombre;
+	}
+}

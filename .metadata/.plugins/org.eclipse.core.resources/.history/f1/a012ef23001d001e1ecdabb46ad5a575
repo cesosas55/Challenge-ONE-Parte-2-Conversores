@@ -1,0 +1,5 @@
+package main;
+
+public enum Divisa {
+PESO_MX="M", DOLAR_US, EURO, LIBRA_GB, YEN, WON
+}

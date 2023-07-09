@@ -8,12 +8,14 @@ public class TestAgenteMonetario {
 		
 		
 		try {
-			usuario.hacerSolicitud(Divisa.values()[1].toString());
+			usuario.hacerSolicitud(Divisa.values()[0].toString(), Divisa.values()[1].toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(usuario.respuesta);
 		
+		
+		//System.out.println(usuario.obtenerURL("MXN","USD"));
 	}
 }

@@ -1,0 +1,16 @@
+package main;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class ConversorApp {
+	private static Object[] possibleValues = { "Divisas", "Temperatura"};
+	
+	public static void main(String[] args) {
+		System.out.println("Iniciando aplicación");
+		
+		JOptionPane pane = new JOptionPane();
+		Object selectedValue = pane.showInputDialog(null,"Elige el conversor que deseas utilizas", "Challenge ONE - Conversoresj",pane.INFORMATION_MESSAGE, null,possibleValues, possibleValues[0]);
+		
+	}
+}

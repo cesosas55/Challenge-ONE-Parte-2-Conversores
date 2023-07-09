@@ -1,0 +1,64 @@
+package main;
+
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class ConversionPanel extends JPanel implements ActionListener {
+
+	private static String[] divisas = { "MXN - Peso mexicano", "USD - Dolar americano", "EUR - Euro",
+			"GBP - Libra Esterlina", " - Yen japonés", "- Won Surcoreano" };
+
+	// Etiquetas de la parte superior
+	private static JLabel importeLabel = new JLabel("Importe:");
+	private static JLabel currencyInLabel = new JLabel("De:");
+	private static JLabel currencyOutLabel = new JLabel("A:");
+	// Campos de entrada
+	private static JTextField cantidadText = new JTextField();
+	private static JComboBox<String> divisasInList = new JComboBox<String>(divisas);
+	private static JButton invertirButton = new JButton("convertir");
+	private static JComboBox<String> divisaOoutList = new JComboBox<String>(divisas);
+
+	ConversionPanel() {// Default Constructor
+		// setup the text field
+		cantidadText.setColumns(10);
+		System.out.println("Text Created");
+		// setup the first Combo Box
+		divisasInList.setSelectedIndex(0);
+		divisasInList.addActionListener(this);
+		System.out.println("Combo Box 1 Created");
+		// setup the button
+		invertirButton.setVerticalTextPosition(AbstractButton.CENTER);
+		invertirButton.setActionCommand("CONVERT_CURRENCY");
+		invertirButton.addActionListener(this);
+		System.out.println("Button Created");
+
+		// setup the second Combo Box
+		divisaOoutList.setSelectedIndex(1);
+		divisaOoutList.addActionListener(this);
+		System.out.println("Combo Box 2 Created");
+
+		// Group all elements in a Panel
+		JPanel inputGroup = new JPanel();
+		
+		// inputGroup.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+		inputGroup.add(importeLabel);
+		inputGroup.add(currencyInLabel);
+		inputGroup.add(currencyOutLabel);
+		inputGroup.add(cantidadText);
+		inputGroup.add(divisasInList);
+		inputGroup.add(invertirButton);
+		inputGroup.add(divisaOoutList);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		String monto = cantidadText.getText();
+		int i = divisasInList.getSelectedIndex();
+		int j = divisaOoutList.getSelectedIndex();
+
+	}
+
+}

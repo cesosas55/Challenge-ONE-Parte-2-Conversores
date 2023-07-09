@@ -1,0 +1,7 @@
+package main;
+
+import javax.swing.*;
+
+public class ConverterToolsGUI {
+	JFrame ConverterTools = new JFrame();
+}

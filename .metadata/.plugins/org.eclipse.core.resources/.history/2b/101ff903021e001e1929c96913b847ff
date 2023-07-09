@@ -1,0 +1,9 @@
+package main;
+
+public class TestGson {
+	public static void main(String[] args) {
+		AgenteMonetario test = new AgenteMonetario();
+		Gson gj = new Gson()M
+	}
+
+}

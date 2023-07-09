@@ -1,0 +1,9 @@
+package main;
+
+import java.util.stream.Stream;
+
+public class TestEnum {
+	public static void main(String[] args) {
+Stream.ofofDivisa.valueOf());
+	}
+}

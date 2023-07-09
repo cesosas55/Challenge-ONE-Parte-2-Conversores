@@ -1,0 +1,15 @@
+package main;
+
+import javax.swing.*;
+
+public class ConverterToolsGUI {
+	public static void main(String[] args) {
+		JFrame converterTools = new JFrame("Conversion Tools - Challenge ONE");
+		converterTools.setSize(800,600);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground("red");
+		converterTools.setVisible(true);
+	}
+	
+}

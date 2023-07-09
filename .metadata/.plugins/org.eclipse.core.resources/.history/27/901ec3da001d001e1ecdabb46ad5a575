@@ -1,0 +1,11 @@
+package main;
+
+public enum Divisa {
+PESO_MX("MXN - Peso mexicano"), DOLAR_US, EURO, LIBRA_GB, YEN, WON;
+	
+	public final String label;
+	
+	private Divisa(String nombre) {
+		
+	}
+}
