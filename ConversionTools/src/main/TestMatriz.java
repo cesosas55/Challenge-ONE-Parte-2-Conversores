@@ -1,7 +1,5 @@
 package main;
 
-import java.util.Iterator;
-
 public class TestMatriz {
 	public static void main(String[] args) {
 		int cantidadDivisas = Divisa.values().length;
