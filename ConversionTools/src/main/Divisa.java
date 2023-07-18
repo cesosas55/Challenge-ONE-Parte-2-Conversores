@@ -1,12 +1,16 @@
 package main;
 
 public enum Divisa {
-	MXN("MXN - Peso mexicano", "Pesos Mexicanos"), USD("USD - Dólar estadounidense", "Dólares estadounidenses"),
-	EUR("EUR - Euro", "Euros"), GBP("GBP - Libra esterlina", "Libras esterlinas"),
-	JPY("JPY - Yen Japonés", "Yenes japoneses"), KRW("KRW - Won surcoreano", "Wones surcoreanos");
+	MXN("Peso mexicano", "Pesos Mexicanos"),
+	USD("Dólar estadounidense", "Dólares estadounidenses"),
+	EUR("Euro", "Euros"),
+	GBP("Libra esterlina", "Libras esterlinas"),
+	JPY("Yen Japonés", "Yenes japoneses"),
+	KRW("Won surcoreano", "Wones surcoreanos");
 
 	public final String label;
 	public final String nombre;
+	
 
 	private Divisa(String descripcion, String nombrePlural) {
 		this.label = descripcion;

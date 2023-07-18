@@ -18,10 +18,7 @@ public class ConversorApp {
 		switch (selectedValue) {
 		case "Divisas":
 			CurrencyConverterDlg conversorMoneda = new CurrencyConverterDlg();
-			
 			conversorMoneda.initDialog();
-			//conversorMoneda.initDialog();
-			//System.out.println("convertidor de divisas abierto :)");
 			break;
 		case "Temperatura (PRÓXIMAMENTE)":
 			//System.out.println("convertidor de temperatura abierto :)");

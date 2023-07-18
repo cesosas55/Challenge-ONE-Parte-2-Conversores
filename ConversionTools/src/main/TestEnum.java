@@ -21,7 +21,7 @@ public class TestEnum {
 		}
 		System.out.println(Divisa.MXN.toString());
 	}
-
+	
 	
 	/*
 	 * private static String divisas[] = new String[Divisa.values().length];
