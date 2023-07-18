@@ -17,7 +17,7 @@ public class CurrencyConverterDlg extends JFrame {
 	private JTextField textField_monto = new JTextField();
 	private Color fondoBlanco = new Color(255, 255, 255);
 	private String montoInicial = "0";
-	private double multiplicador = 3.141592;
+	private double multiplicador;
 
 	// Definicion de los elementos del marco
 	private JLabel lbl_importe = new JLabel("Importe");
@@ -37,6 +37,8 @@ public class CurrencyConverterDlg extends JFrame {
 	private static String divisas[] = new String[Divisa.values().length];
 	private int i = 0;
 
+	private AgenteMonetario manejador = new AgenteMonetario();
+
 	/**
 	 * Launch the application.
 	 */
@@ -45,7 +47,7 @@ public class CurrencyConverterDlg extends JFrame {
 			public void run() {
 				try {
 					CurrencyConverterDlg frame = new CurrencyConverterDlg();
-					frame.setVisible(true);
+					// frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,6 +72,9 @@ public class CurrencyConverterDlg extends JFrame {
 			divisas[i] = div.label;
 			i++;
 		}
+		// obtiene los datos de covnersión de divisas;
+		manejador.crearCacheMxn(Divisa.MXN.toString());
+		
 
 		setContentPane(contentPane);
 		SpringLayout sl_contentPane = new SpringLayout();
@@ -198,8 +203,8 @@ public class CurrencyConverterDlg extends JFrame {
 
 	private void alterarEtiquetas(String monto, int indiceDivisaIn, int indiceDivisaOut) {
 		double cantidad = Double.valueOf(monto);
-		DecimalFormat numero = new DecimalFormat("#.00");
-		
+		DecimalFormat numero = new DecimalFormat("#.0000");
+
 		String nombreDivisaIn = Divisa.values()[indiceDivisaIn].nombre;
 		Divisa codigoIn = Divisa.values()[indiceDivisaIn];
 		Divisa codigoOut = Divisa.values()[indiceDivisaOut];
@@ -208,9 +213,10 @@ public class CurrencyConverterDlg extends JFrame {
 		if (cantidad == 1) {
 			nombreDivisaIn = Divisa.values()[indiceDivisaIn].label.substring(6);
 		}
+		multiplicador = manejador.getTipoCambio(indiceDivisaIn,indiceDivisaOut);
 		lbl_infoEntrada.setText(cantidad + " " + nombreDivisaIn + " =");
 		lbl_resultado.setText(numero.format(multiplicador * cantidad) + " " + nombreDivisaOut);
 		lbl_tipoDeCambio.setText("1 " + codigoIn + " = " + numero.format(multiplicador) + " " + codigoOut);
-		lbl_tipoDeCambio_INV.setText("1 " + codigoOut + " = " + numero.format(1/multiplicador) + " " + codigoIn);
+		lbl_tipoDeCambio_INV.setText("1 " + codigoOut + " = " + numero.format(1 / multiplicador) + " " + codigoIn);
 	}
 }

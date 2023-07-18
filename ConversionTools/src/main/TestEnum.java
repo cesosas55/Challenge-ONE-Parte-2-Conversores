@@ -19,7 +19,7 @@ public class TestEnum {
 			System.out.println("Moneda: " + Divisa.values()[i].toString());
 			
 		}
-		
+		System.out.println(Divisa.MXN.toString());
 	}
 
 	
