@@ -1,5 +1,0 @@
-package main;
-
-public enum Divisa {
-"MXN Peso", DOLAR_US, EURO, LIBRA_GB, YEN, WON
-}

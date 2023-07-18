@@ -1,5 +1,0 @@
-package main;
-
-public class TestGson {
-AgenteMonetario test = new AgenteMonetario();
-}
