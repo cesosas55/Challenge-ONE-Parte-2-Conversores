@@ -1,4 +1,7 @@
-# Introducción
+<em> # Conversor de divisas </em>
+<p align="left">
+   <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
+   </p>
 
 El presente proyecto contempla mi segunda participación en el "ChallengeONE" organizado por Alura Latam para el programa ONE de Oracle.
 
@@ -10,10 +13,13 @@ Carlos E. Sosa Sánchez
 Se trata de una aplicación de escritorio desarrollada con Java.
 
 El usuario puede elegir entre diferentes herramientas de conversión. La principal de este proyecto es el conversor de divisas. 
-
+<h4 align="center">
+:construction: Proyecto en construcción :construction:
+</h4>
 También estará disponible un conversor de temperatura y otras herramientas de este tipo.
 
-# Funcionamiento
+
+# :hammer:Funcionamiento del proyecto
 El sistema consiste en una una interfaz gráfica de usuario (en adelante GUI) sencilla donde se presentan campos de entrada, y de salida. El usuario podrá interactuar con la interfaz para ingresar la cantidad que desea convertir, así como el tipo de divisas que desea convertir. Al final, con presionar un botón, se tendrá el resultado y se mostrará información complementaria. 
 
 # Detalles Técnicos:
