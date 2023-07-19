@@ -1,5 +1,22 @@
 package main;
 
+/**
+ * La clase AgenteMonetario tiene como propósito manejar la comunicación entre la aplicación
+ * del conversor de divisas y la API de Exchange-API. Esta se encarga de realizar las
+ * operaciones necesarias para realizar la solicitud a la API y manejar la respuesta.
+ * 
+ * Además, para optimizar el uso de la API, los datos de tipo de cambio para las diversas divisas
+ * se calculan y almacenan en una matriz. De este modo, la consulta solo se realiza en el arranque
+ * de la aplicación y no cada que se desea obtener un resultado. 
+ * 
+ * Se consideran los siguientes atributos:
+ * 		urlInicial 			- Parte de la url para llamar a la API
+ * 		accessKey 			- Llave proporcionada por Exchange-API para acceer a la información
+ * 		cantidadDivisas 	- Número de divisas que maneja la aplicación 
+ * 		matrizTipoDeCambio	- Matriz conformada por el tipo de cambio a pesos mexicanos y sus equivalencias
+ * 
+ * @author Carlos Enrique Sosa Sánchez
+ */
 import java.net.*;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
@@ -7,12 +24,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class AgenteMonetario {
-	private static String urlInicial = "https://v6.exchangerate-api.com/v6/";
+	private final String urlInicial = "https://v6.exchangerate-api.com/v6/";
 	private final String accessKey = "e014bec508acd3d81a90aeba/latest/";
 
 	private int cantidadDivisas = Divisa.values().length;
 	private double[][] matrizTipoDeCambio = new double[cantidadDivisas][cantidadDivisas];
 
+	/**
+	 * Utilizado para componer la url que utilizará la aplicación para llamar a la
+	 * API.
+	 * 
+	 * @param codigoBase - Código de la divisa que se tomará como base para el tipo
+	 *                   de cambio
+	 * @return
+	 */
 	public URL obtenerURL(String codigoBase) {
 		String linkFinal = urlInicial + accessKey + codigoBase;
 		URL urlFinal = null;
@@ -24,6 +49,14 @@ public class AgenteMonetario {
 		return urlFinal;
 	}
 
+	/**
+	 * Realiza la conexión a la API mediante el protocolo HTTP y almacena los datos
+	 * de la respuesta en un objeto de tipo InformacionDivisas.
+	 * 
+	 * @param codigoIn - - Código de la divisa que se tomará como base para el tipo
+	 *                 de cambio
+	 * @return
+	 */
 	public InformacionDivisas hacerSolicitud(String codigoIn) {
 		// Creamos la URL
 		URL address = obtenerURL(codigoIn);
@@ -66,6 +99,14 @@ public class AgenteMonetario {
 		return tipoDeCambio;
 	}
 
+	/**
+	 * Se utiliza para calcular los valores de cada uno de los elementos de la
+	 * matriz de tipo de cambio.
+	 * 
+	 * @param valoresAPI - vector conformado por los valores obtenidos de la
+	 *                   respuesta de la API
+	 * @param verMatriz  - define si desea ver el resultado en la terminal
+	 */
 	public void crearMatrizDivisas(double[] valoresAPI, boolean verMatriz) {
 		if (valoresAPI.length != cantidadDivisas) {
 			System.out.println("El vector de coeficientes no es del mismo tamaño que la lista de divisas");
@@ -99,6 +140,11 @@ public class AgenteMonetario {
 
 	}
 
+	/**
+	 * Permite realizar el llamado a la API para obtener los valores de tipo de cambio y
+	 * crear la matriz correspondiente para calcular las conversiones que se realicen.
+	 * @param codigo
+	 */
 	public void crearCacheMxn(String codigo) {
 		InformacionDivisas respuestaApi = new InformacionDivisas();
 
@@ -115,7 +161,7 @@ public class AgenteMonetario {
 
 		crearMatrizDivisas(valoresIniciales, false);
 	}
-	
+
 	public double getTipoCambio(int desdeMoneda, int aMoneda) {
 		return matrizTipoDeCambio[desdeMoneda][aMoneda];
 	}

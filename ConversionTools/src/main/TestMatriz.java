@@ -1,5 +1,18 @@
 package main;
-
+/**
+ * La clase TestMatriz fue creada solamente con el propósito de validar las operaciones 
+ * necesariar para calcular los coeficientes de la matriz de divisas a partir de un vector
+ * conocido. 
+ * 
+ * Si bien este método no es el más eficiente ni el más preciso, si ofrece una buena
+ * aproximación para resolver el problema de optimización planteado inicialmente. 
+ * 
+ * 
+ * Partes de este código de prueba se utilizaron en las clases que componen el proyecto
+ * del conversor.
+ * 
+ * @author Carlos Enrique Sosa Sánchez
+ */
 public class TestMatriz {
 	public static void main(String[] args) {
 		int cantidadDivisas = Divisa.values().length;

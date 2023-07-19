@@ -1,5 +1,13 @@
 package main;
-
+/**
+ * La clase COnversionRates se utiliza como parte de la deserialización de la respuesta en formato JSON de la 
+ * API de Exchange-API.
+ * los atributos de esta clase corresponden a los valores de tipo de cambio para las monedas consideradas en
+ * el proyecto. Los getters/setters se utilizan para que el objeto Gson pueda mapear desde el Json hasta este
+ * objeto y posteriormente obtener los datos en la aplicación.
+ * 
+ * @author Carlos Enrique Sosa Sánchez
+ */
 import com.google.gson.annotations.*;
 
 public class ConversionRates {

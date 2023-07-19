@@ -1,5 +1,7 @@
 package main;
-
+/**
+ * 
+ */
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -12,9 +14,7 @@ import java.text.DecimalFormat;
 
 public class CurrencyConverterDlg extends JFrame {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;

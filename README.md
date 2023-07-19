@@ -39,4 +39,4 @@ Para obtener el tipo de cambio para cada una de las divisas utilizadas se utiliz
 
 
 # Más información:
-última actualizacón de este documento: 13-julio-2023
+última actualizacón de este documento: 18-julio-2023
