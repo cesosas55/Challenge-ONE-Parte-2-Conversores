@@ -7,12 +7,15 @@ package main;
  * @author Carlos Enrique Sosa Sánchez
  */
 public enum Divisa {
-	MXN("Peso mexicano", "Pesos Mexicanos"), USD("Dólar estadounidense", "Dólares estadounidenses"),
-	EUR("Euro", "Euros"), GBP("Libra esterlina", "Libras esterlinas"), JPY("Yen Japonés", "Yenes japoneses"),
-	KRW("Won surcoreano", "Wones surcoreanos");
+	MXN("MXN - Peso mexicano", "Pesos Mexicanos"), 
+	USD("USD - Dólar estadounidense", "Dólares estadounidenses"),
+	EUR("EUR - Euro", "Euros"), 
+	GBP("GBP - Libra esterlina", "Libras esterlinas"),
+	JPY("JPY - Yen Japonés", "Yenes japoneses"),
+	KRW("KRW - Won surcoreano", "Wones surcoreanos");
 
-	public final String label;
-	public final String nombre;
+	public String label;
+	public String nombre;
 
 	/**
 	 * El constructor permite añadir parámetros a cada uno de los elementos de la divisa. Estos serán

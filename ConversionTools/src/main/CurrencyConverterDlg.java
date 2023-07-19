@@ -1,5 +1,14 @@
 package main;
-/**
+
+/** La clase CurrencyConverterDlg se utiliza para crear la ventana del conversor de divisas.
+ *  Esta engloba la configuración de los elementos que componen la interfaz de usuario y
+ *  algunas funciones que le dan la funcionalidad deseada.
+ *  
+ *  Los atributos de la clase constituyen los elementos, como botones, cajas de texto, 
+ *  listas desplegables y etiquetas.
+ *  
+ *  Se inlcuye también la formación de algunos arreglos para generar las listas y agregarles
+ *  los íconos correspondientes a las banderas de cada país.
  * 
  */
 import javax.swing.*;
@@ -10,11 +19,12 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 
 public class CurrencyConverterDlg extends JFrame {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
@@ -22,25 +32,24 @@ public class CurrencyConverterDlg extends JFrame {
 	private Color fondoBlanco = new Color(255, 255, 255);
 	private String montoInicial = "0";
 	private double multiplicador;
-
 	// Definicion de los elementos del marco
+	// Etiquetas
 	private JLabel lbl_importe = new JLabel("Importe");
 	private JLabel lbl_entrada = new JLabel("De:");
 	private JLabel lbl_salida = new JLabel("a:");
-	private JComboBox<String> comboBox_divisaIn;
-	private JComboBox<String> comboBox_divisaOut;
-
 	JLabel lbl_infoEntrada = new JLabel(" ");
 	JLabel lbl_resultado = new JLabel(" ");
 	JLabel lbl_tipoDeCambio = new JLabel(" ");
 	JLabel lbl_tipoDeCambio_INV = new JLabel(" ");
+	// Listas desplegables
+	private JComboBox comboBox_divisaIn;
+	private JComboBox comboBox_divisaOut;
 
-	private ImageIcon iconoInvertir = new ImageIcon(
-			"C:\\Users\\Jarvis\\eclipse-workspace\\Challenges\\Challenge 2 - Converter\\ConversionTools\\src\\main\\icons\\loading.png");
-	private ImageIcon iconoVentana = new ImageIcon(
-			"C:\\Users\\Jarvis\\eclipse-workspace\\Challenges\\Challenge 2 - Converter\\ConversionTools\\src\\main\\icons\\exchange.png");
-	private static String divisas[] = new String[Divisa.values().length];
-	private static ImageIcon[] iconosComboBox = new ImageIcon[Divisa.values().length];
+	private ImageIcon iconoInvertir = createImageIcon("/loading.png");
+	private ImageIcon iconoVentana = createImageIcon("/exchange.png");
+
+	private String divisas[] = new String[Divisa.values().length];
+	private ImageIcon[] iconosComboBox = new ImageIcon[Divisa.values().length];
 	private int i = 0;
 
 	private AgenteMonetario manejador = new AgenteMonetario();
@@ -75,14 +84,26 @@ public class CurrencyConverterDlg extends JFrame {
 		contentPane.setBackground(fondoBlanco);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		// Creación del vector de divisas a partir del enum
+		/**
+		 * Creación de los vectores de etiquetas e íconos para las listas desplegables A
+		 * partir de la información alamacenada en el enum, se crean estos vectores.
+		 */
+		Integer[] intArray = new Integer[Divisa.values().length];
 		for (Divisa div : Divisa.values()) {
+			intArray[i] = new Integer(i);
 			divisas[i] = div.label;
-			iconosComboBox[i] = new ImageIcon(IconoDivisa.values()[i].iconoUrl);
+			iconosComboBox[i] = createImageIcon("/" + div.label.substring(0, 3) + ".png");
+			if (iconosComboBox[i] != null) {
+				iconosComboBox[i].setDescription(divisas[i]);
+			}
 			i++;
 		}
-		
-		// obtiene los datos de covnersión de divisas;
+
+		/**
+		 * Obtiene los datos de la API y los almacena en una matriz. Desde esta se
+		 * determina el valor del multiplicador para el tipo de cambio de las
+		 * conversiones
+		 */
 		manejador.crearCacheMxn(Divisa.MXN.toString());
 
 		setContentPane(contentPane);
@@ -109,15 +130,24 @@ public class CurrencyConverterDlg extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, lbl_entrada, 25, SpringLayout.EAST, textField_monto);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, textField_monto, 25, SpringLayout.NORTH, lbl_importe);
 		sl_contentPane.putConstraint(SpringLayout.WEST, textField_monto, 25, SpringLayout.WEST, contentPane);
+		textField_monto.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(!Character.isDigit(c)) {
+					e.consume();
+				}
+			}
+		});
 		textField_monto.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textField_monto.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_monto.setText(montoInicial);
 		contentPane.add(textField_monto);
 		textField_monto.setColumns(10);
 		// setup: comboBox_divisaIn
-		comboBox_divisaIn = new JComboBox<String>(divisas);
-		// Agrega los íconos para las lista
-		comboBox_divisaIn.setRenderer(new ComboBoxRenderer(iconosComboBox));
+		comboBox_divisaIn = new JComboBox(intArray);
+		comboBox_divisaIn.setRenderer(new ComboBoxRenderer(iconosComboBox, divisas));
+		comboBox_divisaIn.setMaximumRowCount(6);
 		comboBox_divisaIn.setBackground(new Color(255, 255, 255));
 		comboBox_divisaIn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		comboBox_divisaIn.setSelectedIndex(0);
@@ -126,9 +156,8 @@ public class CurrencyConverterDlg extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.EAST, comboBox_divisaIn, 175, SpringLayout.EAST, textField_monto);
 		contentPane.add(comboBox_divisaIn);
 		// setup: comboBox_divisaOut
-		comboBox_divisaOut = new JComboBox<String>(divisas);
-		// Agrega los íconos para las lista
-		comboBox_divisaOut.setRenderer(new ComboBoxRenderer(iconosComboBox));
+		comboBox_divisaOut = new JComboBox(intArray);
+		comboBox_divisaOut.setRenderer(new ComboBoxRenderer(iconosComboBox, divisas));
 		comboBox_divisaOut.setBackground(new Color(255, 255, 255));
 		comboBox_divisaOut.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		comboBox_divisaOut.setSelectedIndex(1);
@@ -136,6 +165,11 @@ public class CurrencyConverterDlg extends JFrame {
 		contentPane.add(comboBox_divisaOut);
 		// setup: btn_invertir
 		JButton btn_invertir = new JButton("");
+		/**
+		 * Agregamos la funcionalidad al botón de inversión de las divisas. Esto nos
+		 * permite invertir el resultado de la operación. por ejemplo, pasar de USD->MXN
+		 * a MXN->USD.
+		 */
 		btn_invertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// System.out.println("Boton INVERTIR presionado");//Test de funcionamiento del
@@ -180,6 +214,12 @@ public class CurrencyConverterDlg extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.EAST, lbl_tipoDeCambio_INV, 225, SpringLayout.WEST, contentPane);
 		contentPane.add(lbl_tipoDeCambio_INV);
 		// setup: btn_convertir
+		/**
+		 * Al presionar el botón, se determinan los índices de las divisas seleccionadas
+		 * según su posición y se obtiene el valor del multiplicador consultando en la
+		 * matriz. Finalmente se actualizan las etiquetas correspondientes al resultado
+		 * y la información complementaria.
+		 */
 		JButton btn_convertir = new JButton("Convertir");
 		btn_convertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -210,10 +250,22 @@ public class CurrencyConverterDlg extends JFrame {
 
 	}
 
+	/**
+	 * Cambia la visibilidad del JFrame creado.
+	 */
 	public void initDialog() {
 		setVisible(true);
 	}
 
+	/**
+	 * Primero valida el valor de la caja de texto y posteriormente efectúa el
+	 * cálculo y muestra el resultado en las etiquetas correspondientes.
+	 * 
+	 * @param monto           - Valor proveniente de la caja de texto
+	 * @param indiceDivisaIn  - índice de la divisa base en la lista desplegable
+	 * @param indiceDivisaOut - índice de la divisa solicitada en la lista
+	 *                        desplegable
+	 */
 	private void alterarEtiquetas(String monto, int indiceDivisaIn, int indiceDivisaOut) {
 		double cantidad = Double.valueOf(monto);
 		DecimalFormat numero = new DecimalFormat("#.0000");
@@ -231,5 +283,22 @@ public class CurrencyConverterDlg extends JFrame {
 		lbl_resultado.setText(numero.format(multiplicador * cantidad) + " " + nombreDivisaOut);
 		lbl_tipoDeCambio.setText("1 " + codigoIn + " = " + numero.format(multiplicador) + " " + codigoOut);
 		lbl_tipoDeCambio_INV.setText("1 " + codigoOut + " = " + numero.format(1 / multiplicador) + " " + codigoIn);
+	}
+
+	/**
+	 * Regresa un ImageIcon, o null si la ruta no es válida
+	 * 
+	 * @param ruta - Ubicación del archivo relativa a la clase
+	 * @return
+	 */
+	private static ImageIcon createImageIcon(String ruta) {
+		java.net.URL imgURL = CurrencyConverterDlg.class.getResource(ruta);
+		if (imgURL != null) {
+			return new ImageIcon(imgURL);
+		} else {
+			System.err.println("Couldn't find file: " + ruta);
+			return null;
+		}
+
 	}
 }
