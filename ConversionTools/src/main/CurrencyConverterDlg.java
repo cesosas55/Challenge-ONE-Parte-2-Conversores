@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -79,7 +80,9 @@ public class CurrencyConverterDlg extends JFrame {
 		setLocationRelativeTo(null);
 		setTitle("Conversor de Divisas - Challenge ONE Parte 2");
 		setIconImage(iconoVentana.getImage());// Icono de la ventana
-		setSize(550, 300);
+		setPreferredSize(new Dimension(550,300));
+		setSize(550,300);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBackground(fondoBlanco);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
